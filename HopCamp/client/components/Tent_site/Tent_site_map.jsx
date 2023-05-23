@@ -60,7 +60,8 @@ function Tent_Site_Map () {
     // const currentRef= useRef(null);
     // const [isTop,setIsTop] = useState(false);
     const {isLoaded} = useLoadScript({
-        googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
+        // googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
+        googleMapsApiKey: import.meta.env.GOOGLE_MAPS_API_KEY,
     });
 
     // useEffect(()=>{
@@ -150,7 +151,7 @@ function Map () {
                         text: item.price,
                     },
                     icon:{
-                        url: item.icon + ".marker-icon",
+                        // url: item.icon + ".marker-icon",
                         labelOrigin: new google.maps.Point(60, 15),
                         url: item.icon,
                         scaledSize: new window.google.maps.Size(30,30),
