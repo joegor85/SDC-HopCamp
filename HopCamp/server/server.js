@@ -77,20 +77,20 @@ app.get("/api/photogallery", (req, res) => {
     });
   });
   
-app.get("/api/photogallery/:id", (req, res) => {
-pool
-    .query("SELECT * FROM photos WHERE id = $1", [req.params.id])
-    .then((result) => {
-    if (result.rows.length === 0) {
-        res.status(404).json({ error: "Photo not found" });
-    } else {
-        res.json(result.rows);
-    }
-    })
-    .catch((error) => {
-    res.status(500).json({ error: "Internal server error" });
-    });
-});
+// app.get("/api/photogallery/:id", (req, res) => {
+// pool
+//     .query("SELECT * FROM photos WHERE id = $1", [req.params.id])
+//     .then((result) => {
+//     if (result.rows.length === 0) {
+//         res.status(404).json({ error: "Photo not found" });
+//     } else {
+//         res.json(result.rows);
+//     }
+//     })
+//     .catch((error) => {
+//     res.status(500).json({ error: "Internal server error" });
+//     });
+// });
 
   app.get('/api/things-nearby', function(req, res) {
     pool.query(`SELECT * FROM things_nearby`, function(err, response) {
