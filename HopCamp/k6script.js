@@ -1,13 +1,26 @@
 import http from 'k6/http';
-import { sleep } from 'k6';
+import { check, sleep } from 'k6';
 
-// testing the wrong thing-the webpage
-// export default function () {
-//   http.get('http://localhost:5173');
-//   sleep(1);
-// }
+export let options = {
+  stages: [
+      { duration: '15s', target: 100 },
+      { duration: '30s', target: 100 },
+      { duration: '15s', target: 0 },
+  ],
+};
 
 export default function () {
-  http.get('http://localhost:5001/api/campsites');
+  let res1 = http.get('http://localhost:5001/api/campsites');
+  let res2 = http.get('http://localhost:5001/api/ratings');
+  let res3 = http.get('http://localhost:5001/api/camping-spots');
+  let res4 = http.get('http://localhost:5001/api/campers-also');
+  let res5 = http.get('http://localhost:5001/api/photogallery');
+  let res6 = http.get('http://localhost:5001/api/things-nearby');
+  check(res1, { 'status was 200': r => r.status == 200 });
+  check(res2, { 'status was 200': r => r.status == 200 });
+  check(res3, { 'status was 200': r => r.status == 200 });
+  check(res4, { 'status was 200': r => r.status == 200 });
+  check(res5, { 'status was 200': r => r.status == 200 });
+  check(res6, { 'status was 200': r => r.status == 200 });
   sleep(1);
 }
