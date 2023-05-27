@@ -5,46 +5,46 @@ CREATE DATABASE hopcamp;
 
 CREATE TABLE campers_also (
     id SERIAL PRIMARY KEY,
-    description VARCHAR(50) NOT NULL,
+    description TEXT NOT NULL,
     pic_url TEXT,
     rating INTEGER NOT NULL,
     num_of_ratings INTEGER NOT NULL,
     acres INTEGER NOT NULL,
-    location VARCHAR(40) NOT NULL,
-    price NUMERIC(5,2)
+    location TEXT NOT NULL,
+    price INTEGER
 );
 
 CREATE TABLE camping_spot (
     id SERIAL PRIMARY KEY,
-    description VARCHAR(50) NOT NULL,
+    description TEXT NOT NULL,
     pic_url TEXT,
     rating INTEGER NOT NULL,
     num_of_ratings INTEGER NOT NULL,
     acres INTEGER NOT NULL,
-    location VARCHAR(40) NOT NULL,
-    price NUMERIC(5,2)
+    location TEXT NOT NULL,
+    price INTEGER
 );
 
 CREATE TABLE photos (
   id SERIAL PRIMARY KEY,
-  pic VARCHAR (255),
-  url VARCHAR(1000)
+  pic TEXT,
+  url TEXT
 );
 
 CREATE TABLE rating (
     id SERIAL PRIMARY KEY,
-    username VARCHAR(25) NOT NULL,
+    username TEXT NOT NULL,
     pic_url TEXT,
     date DATE,
     recommend BOOLEAN DEFAULT TRUE,
-    campsite VARCHAR(40) NOT NULL,
-    top_line VARCHAR(50),
+    campsite TEXT NOT NULL,
+    top_line TEXT,
     narrative TEXT NOT NULL
 );
 
 CREATE TABLE tent_locations (
     id serial PRIMARY KEY,
-    price varchar,
+    price integer,
     icon text,
     lat float,
     lng float
@@ -53,22 +53,22 @@ CREATE TABLE tent_locations (
 CREATE TABLE things_nearby (
     id serial PRIMARY KEY,
     img text,
-    title varchar,
-    distance varchar
+    title text,
+    distance text
 );
 
 CREATE TABLE campsites (
   id serial PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
+  name TEXT NOT NULL,
   available INT,
   demand TEXT,
   instantBook BOOLEAN,
-  descriptions VARCHAR,
+  descriptions text,
   capacity INT,
   restrictions TEXT,
   amenities TEXT,
-  price DECIMAL(8, 2),
-  type varchar,
+  price INTEGER,
+  type text,
   imgURL TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -156,7 +156,7 @@ INSERT INTO tent_locations (price, icon, lat, lng) VALUES
     ('https://hipcamp-res.cloudinary.com/f_auto,c_limit,w_950,q_60/v1639636739/park_images/poi/us/h7trzfxbnvrae8rhtohi.jpg','Olompali State Historic Park','27 miles away'),
     ('https://hipcamp-res.cloudinary.com/f_auto,c_limit,w_950,q_60/v1656091995/park_images/poi/us/hptjpoye6iqc9g8fhfto.jpg','Calistoga Hot Springs','27 miles away');
 
-    INSERT INTO campsites (name, available, demand, instantBook, descriptions, capacity, restrictions, amenities, price, type,imgURL)
+    INSERT INTO campsites (name, available, demand, instantBook, descriptions, capacity, restrictions, amenities, price, type, imgURL)
 VALUES ('Wildwood Retreat', 3, 'High', true, 'Escape to the serene Wildwood Retreat surrounded by lush greenery.', 4, 'No pets allowed', 'Fire pit, Picnic table', 50.00,'RV/tent site','https://hipcamp-res.cloudinary.com/f_auto,c_limit,w_950,q_80/v1447144043/campground-photos/deqddjjea4ilhirvyzai.jpg');
 INSERT INTO campsites (name, available, demand, instantBook, descriptions, capacity, restrictions, amenities, price, type,imgURL)
 VALUES ('Serenity Springs', 3, 'Medium', true, 'Experience tranquility at Serenity Springs, where you can unwind and rejuvenate.', 6, 'Quiet hours between 10 PM and 7 AM', 'Hiking trails, Fishing spot', 60.00,'RV/tent site','https://hipcamp-res.cloudinary.com/f_auto,c_limit,w_950,q_80/v1447142515/campground-photos/rd7dvfnczgfeiehtabxm.jpg');
