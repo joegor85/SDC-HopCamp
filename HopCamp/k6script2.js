@@ -16,7 +16,7 @@ export let options = {
 // }
 
 export default function () {
-  let res = http.get('http://localhost:5001/api/campsites');
+  let res = http.get('http://localhost:5173/');
   check(res, { 'status was 200': r => r.status == 200 });
-  sleep(1);
+  // sleep(1);
 }

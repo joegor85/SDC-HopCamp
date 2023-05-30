@@ -3,7 +3,7 @@ import faker from "faker";
 const generateCampingSpot = () => {
   const campingSpot = {
     description: faker.lorem.sentence(),
-    pic_url: faker.internet.url(),
+    pic_url: faker.image.imageUrl(),
     rating: faker.datatype.number({ min: 1, max: 100 }),
     num_of_ratings: faker.datatype.number({ min: 1, max: 1000 }),
     acres: faker.datatype.number({ min: 1, max: 100 }),

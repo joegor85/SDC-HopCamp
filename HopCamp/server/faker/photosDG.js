@@ -3,7 +3,7 @@ import faker from "faker";
 const photoGallery = () => {
   const photos = {
     pic: faker.lorem.words(2),
-    url: faker.internet.url(),
+    url: faker.image.imageUrl(),
   };
   return photos;
 };

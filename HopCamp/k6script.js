@@ -22,5 +22,5 @@ export default function () {
   check(res4, { 'status was 200': r => r.status == 200 });
   check(res5, { 'status was 200': r => r.status == 200 });
   check(res6, { 'status was 200': r => r.status == 200 });
-  sleep(1);
+  // sleep(1);
 }

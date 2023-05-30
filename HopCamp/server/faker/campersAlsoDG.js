@@ -19,7 +19,7 @@ const campersAlsoCollection = [];
 for (let i = 0; i < numberOfCampersAlso; i++) {
     campersAlsoCollection.push(generateFakeCampersAlso());
 }
-console.log(campersAlsoCollection);
+// console.log(campersAlsoCollection);
 
 export default campersAlsoCollection;
 
