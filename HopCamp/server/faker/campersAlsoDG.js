@@ -13,7 +13,7 @@ const generateFakeCampersAlso = ()=> {
     return campersAlso;
 };
 
-const numberOfCampersAlso = 10;
+const numberOfCampersAlso = 10000;
 const campersAlsoCollection = [];
 
 for (let i = 0; i < numberOfCampersAlso; i++) {

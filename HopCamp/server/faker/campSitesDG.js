@@ -17,7 +17,7 @@ const generateFakeCampsites = ()=> {
     return campsites;
 };
 
-const numberOfCampsites = 10;
+const numberOfCampsites = 10000;
 const campsitesCollection = [];
 
 for (let i = 0; i < numberOfCampsites; i++) {

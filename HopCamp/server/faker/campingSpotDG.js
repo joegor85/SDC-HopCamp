@@ -13,7 +13,7 @@ const generateCampingSpot = () => {
   return campingSpot;
 };
 
-const fakeCampingSpotAmount = 10;
+const fakeCampingSpotAmount = 10000;
 const campingSpotCollection = [];
 
 for (let i = 0; i < fakeCampingSpotAmount; i++) {

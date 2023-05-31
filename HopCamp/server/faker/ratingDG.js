@@ -13,7 +13,7 @@ const generateFakeRating = ()=> {
     return ratings;
 };
 
-const numberOfRatings = 10;
+const numberOfRatings = 10000;
 const ratingCollection = [];
 
 for (let i = 0; i < numberOfRatings; i++) {

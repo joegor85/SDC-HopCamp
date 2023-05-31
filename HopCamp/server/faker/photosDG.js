@@ -8,7 +8,7 @@ const photoGallery = () => {
   return photos;
 };
 
-const fakePhotoAmount = 10;
+const fakePhotoAmount = 10000;
 const photoCollection = [];
 
 for (let i = 0; i < fakePhotoAmount; i++) {

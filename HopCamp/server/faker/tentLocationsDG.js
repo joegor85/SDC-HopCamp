@@ -10,7 +10,7 @@ const generateFakeTents = ()=> {
     return tents;
 };
 
-const numberOfTents = 10;
+const numberOfTents = 10000;
 const tentsCollection = [];
 
 for (let i = 0; i < numberOfTents; i++) {
