@@ -3,7 +3,7 @@ GET http://localhost:5001/api/campsites
 
 
 ###
-GET http://localhost:5001/api/ratings
+GET http://159.223.122.220:5001/api/ratings
 
 
 ###
