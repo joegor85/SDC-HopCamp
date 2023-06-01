@@ -54,7 +54,7 @@ const Tent_site = () => {
     };
 
     useEffect(()=>{
-        fetch('http://localhost:5001/api/campsites').then(responses=>responses.json())
+        fetch('http:159.223.122.220:5001/api/campsites').then(responses=>responses.json())
         .then(result=>{
             let rvArr= [];
             let lodgingArr = [];
