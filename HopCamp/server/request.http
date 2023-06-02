@@ -1,13 +1,41 @@
 ###
 GET http://localhost:5001/api/campsites
+###This one points to digitalOcean droplet:
+GET http://159.223.122.220:5001/api/campsites
+
 
 
 ###
 GET http://localhost:5001/api/ratings
+###This one points to digitalOcean droplet:
+GET http://159.223.122.220:5001/api/ratings
+
 
 
 ###
 GET http://localhost:5001/api/camping-spots
+###This one points to digitalOcean droplet:
+GET http://159.223.122.220:5001/api/camping-spots
+
+
+
+###
+GET http://localhost:5001/api/campers-also
+###This one points to digitalOcean droplet:
+GET http://159.223.122.220:5001/api/campers-also
+
+
+
+###
+GET http://localhost:5001/api/photogallery
+###This one points to digitalOcean droplet:
+GET http://159.223.122.220:5001/api/photogallery
+
+
+
+
 
 ###
 GET http://localhost:5001/api/things-nearby
+###This one points to digitalOcean droplet:
+GET http://159.223.122.220:5001/api/things-nearby

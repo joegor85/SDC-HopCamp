@@ -10,17 +10,17 @@ export let options = {
 };
 
 export default function () {
-  let res1 = http.get('http://localhost:5001/api/campsites');
-  let res2 = http.get('http://localhost:5001/api/ratings');
-  let res3 = http.get('http://localhost:5001/api/camping-spots');
-  let res4 = http.get('http://localhost:5001/api/campers-also');
-  let res5 = http.get('http://localhost:5001/api/photogallery');
-  let res6 = http.get('http://localhost:5001/api/things-nearby');
+  let res1 = http.get('http://159.223.122.220:5001/api/campsites');
+  let res2 = http.get('http://159.223.122.220:5001/api/ratings');
+  let res3 = http.get('http://159.223.122.220:5001/api/camping-spots');
+  let res4 = http.get('http://159.223.122.220:5001/api/campers-also');
+  let res5 = http.get('http://159.223.122.220:5001/api/photogallery');
+  let res6 = http.get('http://159.223.122.220:5001/api/things-nearby');
   check(res1, { 'status was 200': r => r.status == 200 });
   check(res2, { 'status was 200': r => r.status == 200 });
   check(res3, { 'status was 200': r => r.status == 200 });
   check(res4, { 'status was 200': r => r.status == 200 });
   check(res5, { 'status was 200': r => r.status == 200 });
   check(res6, { 'status was 200': r => r.status == 200 });
-  // sleep(1);
+  sleep(1);
 }
