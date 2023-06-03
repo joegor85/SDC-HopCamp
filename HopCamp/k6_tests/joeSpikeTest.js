@@ -44,7 +44,7 @@ export default function () {
     validateResponse("Things Nearby", thingsNearbyResponse);
   
     // Pause for a certain duration between requests to simulate realistic load
-    sleep(1); // Adjust the sleep duration as per your requirements
+    // sleep(1);
   }
   
   function validateResponse(endpointName, response) {

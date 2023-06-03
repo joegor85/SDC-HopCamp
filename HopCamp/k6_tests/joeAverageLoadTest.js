@@ -7,9 +7,9 @@ import { sleep } from "k6";
 export const options = {
   // Key configurations for avg load test in this section
   stages: [
-    { duration: "5m", target: 100 }, // traffic ramp-up from 1 to 100 users over 5 minutes.
-    { duration: "10m", target: 100 }, // stay at 100 users for 10 minutes
-    { duration: "5m", target: 0 }, // ramp-down to 0 users
+    { duration: "2m", target: 100 }, // traffic ramp-up from 1 to 100 users over 2 minutes.
+    { duration: "5m", target: 100 }, // stay at 100 users for 5 minutes
+    { duration: "2m", target: 0 }, // ramp-down to 0 users
   ],
 };
 
@@ -49,7 +49,7 @@ export default function () {
   validateResponse("Things Nearby", thingsNearbyResponse);
 
   // Pause for a certain duration between requests to simulate realistic load
-  sleep(1); // Adjust the sleep duration as per your requirements
+//   sleep(1);
 }
 
 function validateResponse(endpointName, response) {

@@ -9,7 +9,7 @@ const generateFakeThings = ()=> {
     return thingsNearby;
 };
 
-const numberOfThings = 10;
+const numberOfThings = 10000;
 const thingsCollection = [];
 
 for (let i = 0; i < numberOfThings; i++) {
