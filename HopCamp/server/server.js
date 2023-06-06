@@ -42,6 +42,7 @@ app.get('/api/campsites',(req,res)=>{
 
 
 
+
 app.get("/api/ratings", (req, res) => {
     // console.log(req.query);
     pool.query("SELECT * FROM rating", (err, result) => {

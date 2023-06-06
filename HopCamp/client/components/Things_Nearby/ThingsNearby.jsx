@@ -28,7 +28,8 @@ const CapmpingSportsCarousel = () => {
   useEffect(() => {
     const fetchNearbyPlaces = async () => {
       try {
-        const response = await fetch("http://159.223.122.220:5001/api/things-nearby");
+        const response = await fetch("http://localhost:5001/api/things-nearby");
+        // const response = await fetch("http://159.223.122.220:5001/api/things-nearby");
         if (response.ok) {
           const data = await response.json();
           setThingsNearbyData(data);
