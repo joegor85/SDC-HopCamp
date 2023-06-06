@@ -3,7 +3,7 @@ const dotenv = require("dotenv").config;
 
 const { Pool } = pg;
 
-const connectionString = "postgres://postgres:docker@localhost:5432/hopcamp";
+const connectionString = "postgresql://doadmin:AVNS_hmnEkcnO4NfO-4HgqXq@hopcamp-postgresdb-do-user-14172565-0.b.db.ondigitalocean.com:25060/hopcamp?sslmode=require";
 const pool = new Pool({ connectionString: connectionString });
 
 const seedRatings = async () => {

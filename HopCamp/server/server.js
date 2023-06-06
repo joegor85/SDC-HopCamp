@@ -18,12 +18,28 @@ app.get('/',(req,res)=>{
     res.send('wows');
 })
 
-app.get('/api/campsites',(req,res)=>{
-    pool.query(`SELECT * FROM campsites ORDER BY id ASC`).then(response=>{
-        res.send(response.rows);
-    })
-});
+// app.get('/api/campsites',(req,res)=>{
+//     pool.query(`SELECT * FROM campsites ORDER BY id ASC`).then(response=>{
+//         res.send(response.rows);
+//     })
+// });
 //Modified the query to only retreive 10 rows from the last 50 entries in the table:
+app.get('/api/campsites', (req, res) => {
+    pool.query(`
+      SELECT *
+      FROM (
+        SELECT *
+        FROM campsites
+        ORDER BY id DESC
+        LIMIT 50
+      ) AS random_50_rows
+      ORDER BY id ASC
+      LIMIT 10
+    `).then(response => {
+      res.send(response.rows);
+    });
+  });
+// Another configuration to try:
 // app.get('/api/campsites', (req, res) => {
 //     pool.query(`
 //       SELECT *
@@ -31,10 +47,9 @@ app.get('/api/campsites',(req,res)=>{
 //         SELECT *
 //         FROM campsites
 //         ORDER BY id DESC
-//         LIMIT 50
-//       ) AS random_50_rows
+//         LIMIT 10
+//       ) AS recent_campsites
 //       ORDER BY id ASC
-//       LIMIT 10
 //     `).then(response => {
 //       res.send(response.rows);
 //     });
@@ -43,67 +58,82 @@ app.get('/api/campsites',(req,res)=>{
 
 
 
-app.get("/api/ratings", (req, res) => {
-    // console.log(req.query);
-    pool.query("SELECT * FROM rating", (err, result) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send(`Error reading RATING table`);
-        } else if (result.rows.length === 0) {
-            console.log(`RATING table not found`);
-            res.status(404).send(`RATING table not found`);
-        } else {
-            res.json(result.rows);
-        }
-    })
-});
+
+// app.get("/api/ratings", (req, res) => {
+//     // console.log(req.query);
+//     pool.query("SELECT * FROM rating", (err, result) => {
+//         if (err) {
+//             console.error(err);
+//             res.status(500).send(`Error reading RATING table`);
+//         } else if (result.rows.length === 0) {
+//             console.log(`RATING table not found`);
+//             res.status(404).send(`RATING table not found`);
+//         } else {
+//             res.json(result.rows);
+//         }
+//     })
+// });
 //Modified this query to do the same thing, 10 rows from somewhere in the last 50
 // app.get("/api/ratings", (req, res) => {
+//     // console.log(req.query);
+//     pool.query("SELECT * FROM rating", (err, result) => {
+//         if (err) {
+//             console.error(err);
+//             res.status(500).send(`Error reading RATING table`);
+//         } else if (result.rows.length === 0) {
+//             console.log(`RATING table not found`);
+//             res.status(404).send(`RATING table not found`);
+//         } else {
+//             res.json(result.rows);
+//         }
+//     })
+// });
+//Modified this query to do the same thing, 10 rows from somewhere in the last 50
+app.get("/api/ratings", (req, res) => {
+    pool.query(`
+      SELECT *
+      FROM (
+        SELECT *
+        FROM rating
+        ORDER BY id DESC
+        LIMIT 50
+      ) AS last_50_rows
+      ORDER BY id ASC
+      LIMIT 10
+    `, (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send(`Error reading RATING table`);
+      } else if (result.rows.length === 0) {
+        console.log(`RATING table not found`);
+        res.status(404).send(`RATING table not found`);
+      } else {
+        res.json(result.rows);
+      }
+    });
+  });
+// Another configuration to try:
+// app.get('/api/ratings', (req, res) => {
 //     pool.query(`
 //       SELECT *
 //       FROM (
 //         SELECT *
 //         FROM rating
 //         ORDER BY id DESC
-//         LIMIT 50
-//       ) AS last_50_rows
+//         LIMIT 10
+//       ) AS recent_ratings
 //       ORDER BY id ASC
-//       LIMIT 10
-//     `, (err, result) => {
-//       if (err) {
-//         console.error(err);
-//         res.status(500).send(`Error reading RATING table`);
-//       } else if (result.rows.length === 0) {
-//         console.log(`RATING table not found`);
-//         res.status(404).send(`RATING table not found`);
-//       } else {
-//         res.json(result.rows);
-//       }
+//     `).then(response => {
+//       res.send(response.rows);
 //     });
 //   });
 
 
 
 
-app.get("/api/camping-spots", (req, res) => {
-    // console.log(req.query);
-    pool.query("SELECT * FROM camping_spot", (err, result) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send(`Error reading CAMPING_SPOT table`);
-        } else if (result.rows.length === 0) {
-            console.log(`CAMPING_SPOT table not found`);
-            res.status(404).send(`CAMPING_SPOT table not found`);
-        } else {
-            // console.log(result.rows);
-            res.json(result.rows);
-        }
-    })
-});
-//Modified this query to do the same thing, 10 rows from somewhere in the last 50
 // app.get("/api/camping-spots", (req, res) => {
 //     // console.log(req.query);
-//     pool.query("SELECT * FROM (SELECT * FROM camping_spot ORDER BY id DESC LIMIT 50) AS last_50_rows ORDER BY id ASC LIMIT 10", (err, result) => {
+//     pool.query("SELECT * FROM camping_spot", (err, result) => {
 //         if (err) {
 //             console.error(err);
 //             res.status(500).send(`Error reading CAMPING_SPOT table`);
@@ -116,29 +146,43 @@ app.get("/api/camping-spots", (req, res) => {
 //         }
 //     })
 // });
-
-
-
-
-app.get("/api/campers-also", (req, res) => {
+//Modified this query to do the same thing, 10 rows from somewhere in the last 50
+app.get("/api/camping-spots", (req, res) => {
     // console.log(req.query);
-    pool.query("SELECT * FROM campers_also", (err, result) => {
+    pool.query("SELECT * FROM (SELECT * FROM camping_spot ORDER BY id DESC LIMIT 50) AS last_50_rows ORDER BY id ASC LIMIT 10", (err, result) => {
         if (err) {
             console.error(err);
-            res.status(500).send(`Error reading CAMPERS_ALSO table`);
+            res.status(500).send(`Error reading CAMPING_SPOT table`);
         } else if (result.rows.length === 0) {
-            console.log(`CAMPERS_ALSO table not found`);
-            res.status(404).send(`CAMPERS_ALSO table not found`);
+            console.log(`CAMPING_SPOT table not found`);
+            res.status(404).send(`CAMPING_SPOT table not found`);
         } else {
             // console.log(result.rows);
             res.json(result.rows);
         }
     })
 });
-//Modified this query to do the same thing, 10 rows from somewhere in the last 50
+//Another configuration to try:
+// app.get('/api/camping-spots', (req, res) => {
+//     pool.query(`
+//       SELECT *
+//       FROM (
+//         SELECT *
+//         FROM camping_spot
+//         ORDER BY id DESC
+//         LIMIT 10
+//       ) AS recent_camping_spots
+//       ORDER BY id ASC
+//     `).then(response => {
+//       res.send(response.rows);
+//     });
+//   });
+
+
+
 // app.get("/api/campers-also", (req, res) => {
 //     // console.log(req.query);
-//     pool.query("SELECT * FROM (SELECT * FROM campers_also ORDER BY id DESC LIMIT 50) AS last_50_rows ORDER BY id ASC LIMIT 10", (err, result) => {
+//     pool.query("SELECT * FROM campers_also", (err, result) => {
 //         if (err) {
 //             console.error(err);
 //             res.status(500).send(`Error reading CAMPERS_ALSO table`);
@@ -151,21 +195,68 @@ app.get("/api/campers-also", (req, res) => {
 //         }
 //     })
 // });
-
-
-
-
-app.get("/api/photogallery", (req, res) => {
-    pool.query("SELECT * FROM photos").then((result) => {
-        res.json(result.rows); 
-    });
-});
 //Modified this query to do the same thing, 10 rows from somewhere in the last 50
+app.get("/api/campers-also", (req, res) => {
+    // console.log(req.query);
+    pool.query("SELECT * FROM (SELECT * FROM campers_also ORDER BY id DESC LIMIT 50) AS last_50_rows ORDER BY id ASC LIMIT 10", (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send(`Error reading CAMPERS_ALSO table`);
+        } else if (result.rows.length === 0) {
+            console.log(`CAMPERS_ALSO table not found`);
+            res.status(404).send(`CAMPERS_ALSO table not found`);
+        } else {
+            // console.log(result.rows);
+            res.json(result.rows);
+        }
+    })
+});
+//Another configuration to try:
+// app.get('/api/campers-also', (req, res) => {
+//     pool.query(`
+//       SELECT *
+//       FROM (
+//         SELECT *
+//         FROM campers_also
+//         ORDER BY id DESC
+//         LIMIT 10
+//       ) AS recent_campers_also
+//       ORDER BY id ASC
+//     `).then(response => {
+//       res.send(response.rows);
+//     });
+//   });
+
+
+
 // app.get("/api/photogallery", (req, res) => {
-//     pool.query("SELECT * FROM (SELECT * FROM photos ORDER BY id DESC LIMIT 50) AS last_50_rows ORDER BY id ASC LIMIT 10").then((result) => {
+//     pool.query("SELECT * FROM photos").then((result) => {
 //         res.json(result.rows); 
 //     });
 // });
+//Modified this query to do the same thing, 10 rows from somewhere in the last 50
+app.get("/api/photogallery", (req, res) => {
+    pool.query("SELECT * FROM (SELECT * FROM photos ORDER BY id DESC LIMIT 50) AS last_50_rows ORDER BY id ASC LIMIT 10").then((result) => {
+        res.json(result.rows); 
+    });
+});
+//Another configuration to try:
+// app.get('/api/photogallery', (req, res) => {
+//     pool.query(`
+//       SELECT *
+//       FROM (
+//         SELECT *
+//         FROM photos
+//         ORDER BY id DESC
+//         LIMIT 10
+//       ) AS recent_photos
+//       ORDER BY id ASC
+//     `).then(response => {
+//       res.send(response.rows);
+//     });
+//   });
+
+
 
 //-------------------This route not implemented on page---------------------------------//
 // app.get("/api/photogallery/:id", (req, res) => {
@@ -184,20 +275,45 @@ app.get("/api/photogallery", (req, res) => {
 // });
 //---------------------------------------------------------------------------------------//
 
-
-app.get('/api/things-nearby', function(req, res) {
-    pool.query(`SELECT * FROM things_nearby`, function(err, response) {
-        // console.log(err ? err : response.rows)
-        res.json(response.rows)
-    })
-});
-//Modified this query to do the same thing, 10 rows from somewhere in the last 50
 // app.get('/api/things-nearby', function(req, res) {
-//     pool.query(`SELECT * FROM (SELECT * FROM things_nearby ORDER BY id DESC LIMIT 50) AS last_50_rows ORDER BY id ASC LIMIT 10`, function(err, response) {
+//     pool.query(`SELECT * FROM things_nearby`, function(err, response) {
+//         if (err) {
+//             console.error(err);
+//             res.status(500).json({ error: 'An error occurred while executing the query' });
+//         } else {
+//             res.json(response.rows);
+//         }
+//     });
+// });
+// Old route without error checking:
+// app.get('/api/things-nearby', function(req, res) {
+//     pool.query(`SELECT * FROM things_nearby`, function(err, response) {
 //         // console.log(err ? err : response.rows)
 //         res.json(response.rows)
 //     })
 // });
+//Modified this query to do the same thing, 10 rows from somewhere in the last 50
+app.get('/api/things-nearby', function(req, res) {
+    pool.query(`SELECT * FROM (SELECT * FROM things_nearby ORDER BY id DESC LIMIT 50) AS last_50_rows ORDER BY id ASC LIMIT 10`, function(err, response) {
+        // console.log(err ? err : response.rows)
+        res.json(response.rows)
+    })
+});
+//Another configuration to try:
+// app.get('/api/things-nearby', (req, res) => {
+//     pool.query(`
+//       SELECT *
+//       FROM (
+//         SELECT *
+//         FROM things_nearby
+//         ORDER BY id DESC
+//         LIMIT 10
+//       ) AS recent_things_nearby
+//       ORDER BY id ASC
+//     `).then(response => {
+//       res.send(response.rows);
+//     });
+//   });
 
 
 
