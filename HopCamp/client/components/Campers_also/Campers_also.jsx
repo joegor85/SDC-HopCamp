@@ -31,7 +31,8 @@ const CampersAlsoCarousel = () => {
   useEffect(() => {
       const fetchCampersAlso = async () => {
           try {
-              const response = await fetch("http://159.223.122.220:5001/api/campers-also");
+            const response = await fetch("http://localhost:5001/api/campers-also");
+              // const response = await fetch("http://159.223.122.220:5001/api/campers-also");
               if (response.ok) {
                   const data = await response.json();
                   setCampersAlsoData(data);

@@ -58,6 +58,22 @@ app.get('/api/campsites', (req, res) => {
 
 
 
+
+// app.get("/api/ratings", (req, res) => {
+//     // console.log(req.query);
+//     pool.query("SELECT * FROM rating", (err, result) => {
+//         if (err) {
+//             console.error(err);
+//             res.status(500).send(`Error reading RATING table`);
+//         } else if (result.rows.length === 0) {
+//             console.log(`RATING table not found`);
+//             res.status(404).send(`RATING table not found`);
+//         } else {
+//             res.json(result.rows);
+//         }
+//     })
+// });
+//Modified this query to do the same thing, 10 rows from somewhere in the last 50
 // app.get("/api/ratings", (req, res) => {
 //     // console.log(req.query);
 //     pool.query("SELECT * FROM rating", (err, result) => {
